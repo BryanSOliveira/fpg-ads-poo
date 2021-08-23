@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    </head>
+    <body>
+        <main class="container mt-5">
+            <h1>Bryan Santos de Oliveira</h1>
+            <h2>RA: 1290482012005</h2>
+            <h3 class="mt-4">Cálculo de Juros</h3>
+            <h4 class="mt-2">Juros Simples</h4>
+            <form action="juros-simples.html">
+                <div class="row g-3">
+                    <div class="mb-3 col-md-3">
+                        <label for="formGroupExampleInput" class="form-label">Valor presente</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="4500.50" name="valor">
+                    </div>
+                    <div class="mb-3 col-md-3">
+                        <label for="formGroupExampleInput" class="form-label">Taxa de juros (%)</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="100" name="juros">
+                    </div>
+                    <div class="mb-3 col-md-3">
+                        <label for="formGroupExampleInput2" class="form-label">Tempo (meses)</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="12" name="meses">
+                    </div>
+                </div>
+                <input class="btn btn-primary mb-3" type="submit" value="Calcular Juros Simples"/>
+            </form>
+            <h4>Juros Composto</h4>
+            <form action="juros-composto.html">
+                <div class="row g-3">
+                    <div class="mb-3 col-md-3">
+                        <label for="formGroupExampleInput" class="form-label">Valor presente</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="4500.50" name="valor">
+                    </div>
+                    <div class="mb-3 col-md-3">
+                        <label for="formGroupExampleInput" class="form-label">Taxa de juros (%)</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="100" name="juros">
+                    </div>
+                    <div class="mb-3 col-md-3">
+                        <label for="formGroupExampleInput2" class="form-label">Tempo (meses)</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="12" name="meses">
+                    </div>
+                </div>
+                <input class="btn btn-primary" type="submit" value="Calcular Juros Composto"/>
+            </form>
+        </main>
+    </body>
+</html>
