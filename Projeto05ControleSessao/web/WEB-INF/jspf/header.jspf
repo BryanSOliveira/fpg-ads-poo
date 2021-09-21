@@ -1,0 +1,61 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<%
+    if(request.getParameter("username") != null && request.getParameter("password") != null ) {
+        String userName = request.getParameter("username");
+        session.setAttribute("username", userName);
+        String password = request.getParameter("password");
+        session.setAttribute("password", password);
+        response.sendRedirect(request.getRequestURI());
+    } else if(request.getParameter("logout") != null) {
+        session.removeAttribute("username");
+        session.removeAttribute("password");
+        session.removeAttribute("numerosAleatorios");
+        response.sendRedirect(request.getRequestURI());
+    }
+    
+    String sessionUsername = (String)session.getAttribute("username");
+    String sessionPassword = (String)session.getAttribute("password");
+%>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.jsp">Projeto 05</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="index.jsp">INÍCIO</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.jsp">SOBRE</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+    <h1>BryanApp</h1>
+    <hr />
+
+    <form method="post">
+        <% if( sessionUsername == null && sessionPassword == null) { %>
+        <div class="form-floating mb-3">
+            <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Username" required>
+            <label for="floatingInput">Usuário</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required> 
+            <label for="floatingPassword">Senha</label>
+        </div>
+            <input type="submit" name="login" class="btn btn-primary mt-2" value="LOGIN" />
+        <% } else { %>
+        <div>Bem-vindo, <b><%= sessionUsername %></b></div>
+            <hr />
+            <input type="submit" name="logout" class="btn btn-danger" value="LOGOUT" />
+        <% } %>
+    </form>
+    <hr />
