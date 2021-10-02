@@ -1,0 +1,69 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="java.util.ArrayList"%>
+<%@ page pageEncoding="UTF-8" %>
+<% 
+    ArrayList<String> usuarios = (ArrayList)application.getAttribute("usuarios");
+    if(request.getParameter("username") != null) {
+        if(usuarios == null) {
+            usuarios = new ArrayList();
+        }
+        String username = request.getParameter("username");
+        session.setAttribute("username", username);
+        usuarios.add(username);
+        application.setAttribute("usuarios", usuarios);
+        response.sendRedirect(request.getRequestURI());
+    } else if(request.getParameter("logout") != null) {
+        for(int i = 0; i < usuarios.size(); i++) {
+            if(usuarios.get(i).equals(session.getAttribute("username"))) {
+                usuarios.remove(i);
+            }
+        }
+        session.removeAttribute("username");
+        application.setAttribute("usuarios", usuarios);
+        session.removeAttribute("numerosAleatorios");
+        response.sendRedirect(request.getRequestURI());
+    }
+    
+    String sessionUsername = (String)session.getAttribute("username");
+%>
+
+<% if(sessionUsername !=  null) { %>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="bryan.jsp">Bryan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="bryan-dica-megasena.jsp">Dica mega-sena</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+<% } %>
+
+<div class="container">
+    <form method="post">
+        <% if(sessionUsername == null) { %>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Username</label>
+              <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">LOGIN</button>
+        <% } else { %>
+            <div>Seja bem-vindo, <b><%= sessionUsername %></b></div>
+            <hr />
+            <button type="submit" class="btn btn-primary" name="logout">LOGOUT</button>
+            <hr />
+        <% } %>
+    </form>
+</div>
