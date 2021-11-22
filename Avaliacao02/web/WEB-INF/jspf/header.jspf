@@ -1,0 +1,35 @@
+<%-- any content can be specified here e.g.: --%>
+
+<%@ page pageEncoding="UTF-8" %>
+<% 
+    if(request.getParameter("username") != null) {
+        String username = request.getParameter("username");
+        session.setAttribute("username", username);
+        response.sendRedirect(request.getRequestURI());
+    } else if(request.getParameter("logout") != null) {
+        session.removeAttribute("username");
+        response.sendRedirect(request.getRequestURI());
+    }
+    
+    String sessionUsername = (String)session.getAttribute("username");
+%>
+
+<div class="container">
+    <h1>BryanTasksApp</h1>
+    
+    <form method="post">
+        <% if(sessionUsername == null) { %>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Username</label>
+              <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">LOGIN</button>
+        <% } else { %>
+            <div>Seja bem-vindo, <b><%= sessionUsername %></b></div>
+            <hr />
+            <button type="submit" class="btn btn-primary" name="logout">LOGOUT</button>
+            <hr />
+        <% } %>
+    </form>
+</div>
